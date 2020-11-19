@@ -19,7 +19,9 @@ https://github.com/David-Reguera-Garcia-Dreg/drx_ptrace_shellcode_injector
 https://github.com/David-Reguera-Garcia-Dreg/ptrace_misconfiguration_local_privilege_escalation
 
 https://github.com/David-Reguera-Garcia-Dreg/
+
 http://www.fr33project.org
+
 dreg@fr33project.org
 
 multi line code:
