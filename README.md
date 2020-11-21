@@ -17,6 +17,8 @@ Just wait for reverse shell with a nc
 while true; do nc -lvp 9999; done
 ```
 
+---
+
 I made this for my shellcode injector in sudo shells via ptrace:
 
 https://github.com/David-Reguera-Garcia-Dreg/drx_ptrace_shellcode_injector
@@ -134,5 +136,7 @@ while 1:
 
         time.sleep(2)
 ```
+
+---
 
 http://jagt.github.io/python-single-line-convert/
