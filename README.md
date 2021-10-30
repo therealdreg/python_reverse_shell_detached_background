@@ -1,3 +1,5 @@
+Please, consider make a donation: https://github.com/sponsors/therealdreg
+
 # Python 2 & 3 reverse shell one liner detached (background) By David Reguera Garcia aka Dreg
 
 just change **connect(("127.0.0.1",9999))**
